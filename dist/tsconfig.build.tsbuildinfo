@@ -1187,12 +1187,12 @@
         "affectsGlobalScope": false
       },
       "../src/databaseconfig.ts": {
-        "version": "f1123f5e4d72317ff716e746902433029d6603228ade2a9601332538f04a9fe0",
+        "version": "c4b0c53f384a0e50a813a81e1ee0231dc125d3462e2a6da9172b7ffeed7c7709",
         "signature": "4747931cca1e1d8b438fd3c441871a8dabe6fe6fe5688be5a10882a00fe61f00",
         "affectsGlobalScope": false
       },
       "../src/booking/booking.controller.ts": {
-        "version": "e6fc0df94e8e08d3ab803a4a62d0921bfea6324f5aaec9805131b309b4ddf93e",
+        "version": "38714f09da8f1abde31c7efcaf00ea7e2f99ca470e8fc5a2b2a606064f95c828",
         "signature": "6012f271b1e3283e36a2a73cca92d3ddb5cf60050a30903363b4014b7fa5a2e9",
         "affectsGlobalScope": false
       },
@@ -1382,7 +1382,7 @@
         "affectsGlobalScope": false
       },
       "../src/main.ts": {
-        "version": "e25d9bd8f80b6ffbcc8826ed1b407e747e4fbe346c5bab62cbe5837da4eeb189",
+        "version": "39d7c392eaf09b1fa27d7252453588ead5ef13d511d4fea66060ca4e0e3b80bd",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -3237,6 +3237,7 @@
       ],
       "../src/booking/booking.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@types/node/http.d.ts",
         "../src/databaseconfig.ts"
       ],
       "../src/main.ts": [

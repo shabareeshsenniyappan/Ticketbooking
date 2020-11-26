@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const { customers, seats } = require('../databaseConfig');
 let BookingController = class BookingController {
     async ticketstatus(seatno) {
+        console.log(seatno);
         var check = await customers.findOne({ seatno: seatno }).exec();
         console.log(check);
         if (check != null) {
@@ -32,13 +33,12 @@ let BookingController = class BookingController {
         else {
             var check = await customers.findOne({ seatno: seatno }).exec();
             var count = await customers.count();
-            if (check != null)
+            if (check != null) {
                 return ("Sorry Seat NO : " + seatno + " already booked");
+            }
             else {
                 const myobj = new customers({ name: name, gender: gender, age: age, bookingid: count + 1, seatno: seatno });
-                const myquery = { seatno: seatno };
-                const newvalues = { $set: { status: "close" } };
-                seats.updateOne(myquery, newvalues);
+                await seats.findOneAndUpdate({ seatno: seatno }, { $set: { status: "close" } });
                 myobj.save((err, res) => {
                     if (err)
                         throw err;
@@ -57,10 +57,8 @@ let BookingController = class BookingController {
         }
     }
     async reset() {
-        customers.deleteMany({});
-        var query = { status: "close" };
-        var newvalues = { $set: { status: "open" } };
-        await seats.updateMany(query, newvalues).exec();
+        await customers.deleteMany({});
+        await seats.updateMany({ status: "close" }, { $set: { status: "open" } }).exec();
         return ("!! Seats are ready for next trip !!");
     }
     async open() {
@@ -74,39 +72,39 @@ let BookingController = class BookingController {
 };
 __decorate([
     common_1.Post('ticketstatus'),
-    __param(0, common_1.Query('seatno')),
+    __param(0, common_1.Body('seatno')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], BookingController.prototype, "ticketstatus", null);
 __decorate([
     common_1.Post('bookticket'),
-    __param(0, common_1.Query('name')), __param(1, common_1.Query('gender')), __param(2, common_1.Query('age')), __param(3, common_1.Query('seatno')),
+    __param(0, common_1.Body('name')), __param(1, common_1.Body('gender')), __param(2, common_1.Body('age')), __param(3, common_1.Body('seatno')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, String, String]),
     __metadata("design:returntype", Promise)
 ], BookingController.prototype, "bookticket", null);
 __decorate([
     common_1.Post('details'),
-    __param(0, common_1.Query('seatno')),
+    __param(0, common_1.Body('seatno')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], BookingController.prototype, "details", null);
 __decorate([
-    common_1.Get('reset'),
+    common_1.Post('reset'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], BookingController.prototype, "reset", null);
 __decorate([
-    common_1.Get('open'),
+    common_1.Post('open'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], BookingController.prototype, "open", null);
 __decorate([
-    common_1.Get('close'),
+    common_1.Post('close'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)

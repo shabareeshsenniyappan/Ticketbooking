@@ -14,6 +14,7 @@ const ticketschema = new Schema({
     name: String,
     gender: String,
     age: String,
+    bookingid: String,
     seatno: String,
 });
 const seatsschema = new Schema({
